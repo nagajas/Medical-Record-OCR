@@ -110,9 +110,9 @@ def localize(image,east,nms=0.3):
     return image
 
 def main():
-    # file = r"Project/kohli.jpeg"
-    # file_2="Project/Walmart.jpeg"
-    # img = cv2.imread(file)
+    # file = r"Project/Sample/kohli.jpeg"
+    # file_2="Project/Sample/Walmart.jpeg"
+    # img = cv2.imread(file_2)
     # img2 = localize(img,east = "Project/frozen_east_text_detection.pb")
     # cv2.imshow('Text Detection',img2)
     # cv2.waitKey(0)
