@@ -73,7 +73,7 @@ def localize(image,east,nms=0.3):
     
     blob = cv2.dnn.blobFromImage(image, 1.0, (newW, newH), (123.68, 116.78, 103.94), swapRB=True, crop=False)
     net.setInput(blob)
-
+    
     # define the two output layer names for the EAST detector model that
     # we are interested -- the first is the output probabilities and the
     # second can be used to derive the bounding box coordinates of text
@@ -110,6 +110,13 @@ def localize(image,east,nms=0.3):
     return image
 
 def main():
+    # file = r"Project/kohli.jpeg"
+    # file_2="Project/Walmart.jpeg"
+    # img = cv2.imread(file)
+    # img2 = localize(img,east = "Project/frozen_east_text_detection.pb")
+    # cv2.imshow('Text Detection',img2)
+    # cv2.waitKey(0)
+    
     pass
     
 if __name__ == "__main__":
