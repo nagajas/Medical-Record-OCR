@@ -4,7 +4,8 @@ import pytesseract
 import numpy as np
 
 
-def detect_localized_text(image,east,nms=0.4,padding = 0):
+def detect_localized_text(imag,east,nms=0.4,padding = 0):
+    image = imag.copy()
     origH,origW = image.shape[:2]
     newW,newH = 640,640
     rW,rH = origW/float(newW),origH/float(newH)

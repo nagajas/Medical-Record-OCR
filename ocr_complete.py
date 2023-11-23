@@ -3,7 +3,7 @@ from ocr_with_east import detect_localized_text
 from word_processing import cleaned_words
 import pytesseract
 
-def wrapper(file, localize=False):
+def wrapper(file, localize=False, min_len=3,closest_med=1):
     image = cleaned_image(file)
     
     #If needed, you can localize for scenic images where background is present
@@ -13,9 +13,9 @@ def wrapper(file, localize=False):
     else:
         text_from_image = pytesseract.image_to_string(image)
         
-    final_words = cleaned_words(text_from_image)
+    words_final = cleaned_words(text_from_image,min_len,closest_med)
     
-    return final_words
+    return words_final
 
 def main():
     file= input("Enter Location of image")

@@ -38,7 +38,7 @@ def get_med_dict():
     return word_dict
 
 
-def get_closest(ocr_word, max_dist=3):
+def get_closest(ocr_word, max_dist=3,length=5):
     first = ocr_word[0].lower()
     d = get_med_dict()
     
@@ -48,18 +48,24 @@ def get_closest(ocr_word, max_dist=3):
         if editDistance(word,ocr_word) <=max_dist:
             closest.append(word)
             
-    max_len = min(5,len(closest))
+    max_len = min(length,len(closest))
     return closest[:max_len]
 
 
-def cleaned_words(text):
+def cleaned_words(text,min_len = 3,closest_med=5):
     
-    ocr_words = re.findall(r'[a-zA-Z]+', text)
-    ocr_words = [word.lower() for word in ocr_words]
+    ocr_words_0 = re.findall(r'[a-zA-Z]+', text)
+    ocr_words = []
     
+    for word in ocr_words_0:
+        if len(word) >=min_len:
+            ocr_words.append(word.lower())        
+        
     spell = Speller()
+    
     corrected = [spell(word) for word in ocr_words]
     english_words = []
+    
     for word in corrected:
         synsets = wordnet.synsets(word)
         if synsets:
@@ -67,7 +73,7 @@ def cleaned_words(text):
         else:
             english_words.append('')
             
-    med_closest = [get_closest(ocr_word) for ocr_word in ocr_words]
+    med_closest = [get_closest(ocr_word,closest_med) for ocr_word in ocr_words]
     
     key_words={}
     for i,word in enumerate(ocr_words):
